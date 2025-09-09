@@ -15,3 +15,5 @@ production-grade Spring applications with minimal configuration.
 
 Spring framework provides DI but needs a lot of configuration in XML, java config, annotations etc. Spring boot provides
 auto configuration and starter dependencies to reduce the configuration effort.
+
+Springboot is production ready - in default it comes with embedded tomcat server.
