@@ -1,6 +1,7 @@
 package com.geek.controller;
 
 import com.geek.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AccountController {
 
@@ -10,6 +11,8 @@ public class AccountController {
         System.out.println("AccountController constructor called");
     }
 
+    //autowiring by annotation config
+    @Autowired
     public void setAccountService(AccountService accountService) {
         this.accountService = accountService;
     }

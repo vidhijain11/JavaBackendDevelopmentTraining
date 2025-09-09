@@ -4,6 +4,8 @@ with each other, and how they are managed within the Spring container. This can 
 1. XML Configuration: In the early versions of Spring, XML configuration files were commonly used to define beans and
    their dependencies. You would create an XML file (e.g., applicationContext.xml) where you specify bean definitions
    and their relationships.
+   The configuration is centralized in a single XML file, making it bit difficult to maintain if someone else is maintaining XML file.
+   However, XML configuration can become verbose and harder to maintain as the application grows in complexity.
 
 #### autowire the beans using XML - using reference keyword
 
@@ -25,6 +27,23 @@ with each other, and how they are managed within the Spring container. This can 
    </bean>
    <bean id="repo" class="com.geek.repository.AccountRepositoryImpl" autowire="byType">
    </bean>`
+
+#### three types of autowire
+
+   **byName**: Spring looks for a bean with the same name as the property to be injected.
+        ` <bean id="controller" class="com.geek.controller.AccountController" autowire="byName">
+         </bean>
+         <bean id="accountService" class="com.geek.service.AccountServiceImpl" autowire="byType">
+            </bean> `  
+      AccountController class has a setter method with accountService property.
+
+
+   **byType**: Spring looks for a bean of the same type as the property to be injected.
+      ` <bean id="controller" class="com.geek.controller.AccountController" autowire="byType">
+   </bean>`  
+      AccountController class has a setter method with AccountService type argument.
+
+   **constructor**: Spring looks for a constructor that matches the number and type of arguments.
 
 
 2. Java-based Configuration: With the introduction of Java-based configuration, you can use annotations and Java classes

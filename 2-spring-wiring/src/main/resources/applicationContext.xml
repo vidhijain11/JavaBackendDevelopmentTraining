@@ -1,6 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctx="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- autowiring by reference -->
 
 <!--    <bean id="controller" class="com.geek.controller.AccountController">-->
 <!--      <property name="accountService" ref="service"></property>-->
@@ -11,10 +13,23 @@
 <!--    <bean id="repo" class="com.geek.repository.AccountRepositoryImpl">-->
 <!--    </bean>-->
 
-    <bean id="controller" class="com.geek.controller.AccountController" autowire="byType">
+    <!-- autowiring by type -->
+
+<!--    <bean id="controller" class="com.geek.controller.AccountController" autowire="byType">-->
+<!--    </bean>-->
+<!--    <bean id="service" class="com.geek.service.AccountServiceImpl" autowire="byType">-->
+<!--    </bean>-->
+<!--    <bean id="repo" class="com.geek.repository.AccountRepositoryImpl">-->
+<!--    </bean>-->
+
+    <!-- autowiring by annotation config -->
+
+    <bean id="controller" class="com.geek.controller.AccountController">
     </bean>
     <bean id="service" class="com.geek.service.AccountServiceImpl" autowire="byType">
     </bean>
     <bean id="repo" class="com.geek.repository.AccountRepositoryImpl">
     </bean>
+    <ctx:annotation-config></ctx:annotation-config>
+
 </beans>
