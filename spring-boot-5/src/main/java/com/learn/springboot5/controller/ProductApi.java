@@ -1,9 +1,11 @@
 package com.learn.springboot5.controller;
 
+import com.learn.springboot5.exception.ProductNotFoundException;
 import com.learn.springboot5.model.Product;
 import com.learn.springboot5.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +36,17 @@ public class ProductApi {
     @GetMapping("/all")
     public List<Product> allProducts() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping("/{productId}")
+    public Product searchById(@PathVariable("productId") int productId) {
+        Product product = productService.getAllProducts().stream()
+                .filter(p -> p.getProductId() == productId)
+                .findFirst()
+                .orElse(null);
+        if (product == null) {
+            throw new ProductNotFoundException("Product with ID " + productId + " not found");
+        }
+        return product;
     }
 }
