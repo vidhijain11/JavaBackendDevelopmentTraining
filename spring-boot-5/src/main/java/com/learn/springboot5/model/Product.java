@@ -2,10 +2,11 @@ package com.learn.springboot5.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.time.LocalDate;
 
-
+@XmlRootElement
 public class Product {
     @NotNull(message = "Product ID is mandatory")
     @Positive(message = "Product ID must be positive")
@@ -17,6 +18,9 @@ public class Product {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @PastOrPresent(message = "Manufacture date must be in the past or present")
     private LocalDate manufactureDate;
+
+    public Product() {
+    }
 
     public Product(int productId, String productName, float productPrice, LocalDate manufactureDate) {
         this.productId = productId;

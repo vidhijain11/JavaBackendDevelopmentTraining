@@ -33,7 +33,7 @@ public class ProductApi {
         return new Product(101, "iPhone", 999.99f, LocalDate.now());
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all", produces = {"application/json", "application/xml"})
     public ResponseEntity<List<Product>> allProducts() {
         List<Product> productList = productService.getAllProducts();
         if (productList.isEmpty()) {
@@ -42,7 +42,7 @@ public class ProductApi {
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 
-    @GetMapping("/{productId}")
+    @GetMapping(value = "/{productId}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Product> searchById(@PathVariable("productId") int productId) {
         Product product = productService.getAllProducts().stream()
                 .filter(p -> p.getProductId() == productId)
