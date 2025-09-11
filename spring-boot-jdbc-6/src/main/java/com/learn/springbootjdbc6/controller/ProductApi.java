@@ -44,10 +44,7 @@ public class ProductApi {
 
     @GetMapping(value = "/{productId}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Product> searchById(@PathVariable("productId") int productId) {
-        Product product = productService.getAllProducts().stream()
-                .filter(p -> p.getProductId() == productId)
-                .findFirst()
-                .orElse(null);
+        Product product = productService.searchProductById(productId);
         if (product == null) {
             throw new ProductNotFoundException("Product with ID " + productId + " not found");
         }
@@ -57,21 +54,22 @@ public class ProductApi {
     @PostMapping(consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
     public ResponseEntity<Product> addProduct(@RequestBody @Valid Product product) {
-        // In a real application, you would save the product to a database
-        // Here, we just return the product as a confirmation
-        List<Product> products = productService.getAllProducts();
-        products.add(product);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+       Product newProduct = productService.addProduct(product);
+        return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/searchbyprice", produces = "application/json")
     public ResponseEntity<List<Product>> getProductsByPriceRange(@RequestParam("minPrice") float minPrice, @RequestParam("maxPrice") float maxPrice) {
-        List<Product> productList = productService.getAllProducts().stream()
-                .filter(p -> p.getProductPrice() >= minPrice && p.getProductPrice() <= maxPrice)
-                .toList();
+        List<Product> productList = productService.searchByPrice(minPrice, maxPrice);
         if( productList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{productId}")
+    public  ResponseEntity<Void> delete(@PathVariable int productId) {
+        productService.deleteProductById(productId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

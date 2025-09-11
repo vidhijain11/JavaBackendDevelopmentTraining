@@ -1,24 +1,43 @@
 package com.learn.springbootjdbc6.service;
 
+import com.learn.springbootjdbc6.Repository.ProductRepository;
 import com.learn.springbootjdbc6.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    private final List<Product> productList = new ArrayList<>();
 
-    public ProductServiceImpl() {
-        productList.add(new Product(101, "iPhone", 999.99f, LocalDate.of(2023, 1, 15)));
-        productList.add(new Product(102, "Samsung Galaxy", 899.99f, LocalDate.of(2024, 2, 20)));
-        productList.add(new Product(103, "Google Pixel", 799.99f, LocalDate.of(2025, 3, 10)));
-    }
+    @Autowired
+    ProductRepository productRepository;
+
+    public ProductServiceImpl() {}
 
     @Override
     public List<Product> getAllProducts() {
-        return productList;
+        return productRepository.getAllProducts();
     }
+
+    @Override
+    public Product addProduct(Product product) {
+         return productRepository.addProduct(product);
+    }
+
+    @Override
+    public Product searchProductById(int productId) {
+        return productRepository.searchProductById(productId);
+    }
+
+    @Override
+    public void deleteProductById(int productId) {
+        productRepository.deleteProductById(productId);
+    }
+
+    @Override
+    public List<Product> searchByPrice(float minPrice, float maxPrice) {
+        return productRepository.searchByPrice(minPrice, maxPrice);
+    }
+
+
 }

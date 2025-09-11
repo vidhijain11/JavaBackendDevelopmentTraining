@@ -13,3 +13,8 @@ Steps involved in JDBC connectivity
 4) Execute the query
 5) Process the result set
 6) Close the connection
+
+executeQuery loads all the records and returns the result set. The result set is a pointer to the records. We can iterate
+through the records using next() method.
+
+executeUpdate is used to execute DML statements like insert, update, delete. It returns the number of rows affected.

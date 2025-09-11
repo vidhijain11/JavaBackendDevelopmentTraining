@@ -61,5 +61,4 @@ public class Product {
         return manufactureDate;
     }
 
-
 }
