@@ -19,3 +19,15 @@ REST best practices
    DELETE - Delete a resource - DELETE /products/101
 3. Use plural nouns for resource names.
    Example: /products instead of /product
+
+
+Content - negotiation 
+1. Content negotiation is the mechanism of serving different representations of a resource at the same URI, so that clients
+   can specify which representation they prefer.
+2. In spring boot, content negotiation is handled by the jakarta.xml.bind-api, jaxb-impl, jaxb-runtime dependency.
+3. The client can specify the desired format using the Accept header in the HTTP request.
+   Example: Accept: application/json or Accept: application/xml
+   4. Spring boot supports various data formats such as JSON, XML, YAML etc. by default
+
+      `@GetMapping(value = "/{productId}", produces = {"application/json", "application/xml"})`
+       GET http://localhost:8080/products/101 supports both json and xml formats based on Accept header.

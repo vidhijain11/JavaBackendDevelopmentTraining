@@ -23,7 +23,7 @@ public class ProductApi {
         this.productService = productService;
     }
 
-    @GetMapping(path = "/welcome", produces = "text/plain")
+    @GetMapping(value = "/welcome", produces = "text/plain")
     public String welcome() {
         return "<font color=blue size=5>Welcome to Product API</font>";
     }
@@ -54,7 +54,8 @@ public class ProductApi {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/xml"},
+            produces = {"application/json", "application/xml"})
     public ResponseEntity<Product> addProduct(@RequestBody @Valid Product product) {
         // In a real application, you would save the product to a database
         // Here, we just return the product as a confirmation
@@ -63,7 +64,7 @@ public class ProductApi {
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
-    @GetMapping("/searchbyprice")
+    @GetMapping(value = "/searchbyprice", produces = "application/json")
     public ResponseEntity<List<Product>> getProductsByPriceRange(@RequestParam("minPrice") float minPrice, @RequestParam("maxPrice") float maxPrice) {
         List<Product> productList = productService.getAllProducts().stream()
                 .filter(p -> p.getProductPrice() >= minPrice && p.getProductPrice() <= maxPrice)
