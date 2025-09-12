@@ -1,6 +1,5 @@
 package com.learn.springbootjdbc6.controller;
 
-import com.learn.springbootjdbc6.exception.ProductNotFoundException;
 import com.learn.springbootjdbc6.model.Product;
 import com.learn.springbootjdbc6.service.ProductService;
 import jakarta.validation.Valid;
@@ -45,9 +44,6 @@ public class ProductApi {
     @GetMapping(value = "/{productId}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Product> searchById(@PathVariable("productId") int productId) {
         Product product = productService.searchProductById(productId);
-        if (product == null) {
-            throw new ProductNotFoundException("Product with ID " + productId + " not found");
-        }
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
