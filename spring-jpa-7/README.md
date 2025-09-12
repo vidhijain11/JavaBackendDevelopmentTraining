@@ -51,6 +51,12 @@ class and write complex SQL queries to fetch the data.
 
 Employee details and address details are stored in same table. Address is a component of Employee. It is HAS A relationship.
 We will create two classes Employee and Address. Address class will be embedded in Employee class using @Embeddable.
+
+@Entity annotation is used to specify that the class is an entity and is mapped to a database table.
+@Id annotation is used to specify the primary key of an entity.
+@Embeddable annotation is used to specify that a class is a component and can be embedded in another entity.
+@Embedded annotation is used to specify that a component is embedded in an entity.
+
 ![img.png](docs/employeeData.png)
 
 #### When table is already created in the database
