@@ -64,3 +64,6 @@ We will create two classes Employee and Address. Address class will be embedded 
 #### When table is already created in the database
 The table name in the database is employee_info. But I want to map it to Employee class. So I will use @Table annotation to
 specify the table name.
+
+#### Transaction Management
+Read https://www.geeksforgeeks.org/dbms/acid-properties-in-dbms/
