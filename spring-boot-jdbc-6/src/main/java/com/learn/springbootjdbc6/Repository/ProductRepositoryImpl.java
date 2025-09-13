@@ -30,7 +30,14 @@ public class ProductRepositoryImpl implements ProductRepository {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+               e.printStackTrace();
+            }
         }
+
         return product;
     }
 
@@ -51,6 +58,12 @@ public class ProductRepositoryImpl implements ProductRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return list;
     }
@@ -72,6 +85,12 @@ public class ProductRepositoryImpl implements ProductRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }  finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -108,6 +127,12 @@ public class ProductRepositoryImpl implements ProductRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }  finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return list;
     }

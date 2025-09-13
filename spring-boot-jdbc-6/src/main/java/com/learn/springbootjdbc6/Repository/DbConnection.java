@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 @Component
 public class DbConnection {
@@ -30,12 +31,26 @@ public class DbConnection {
 
         Connection connection = null;
         try {
-            //load the driver
-            Class.forName(dbDriverClassName);
+//            //load the driver
+//            Class.forName(dbDriverClassName);
             //establish the connection
-            connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-            System.out.println("Connection established successfully");
-        } catch (ClassNotFoundException | SQLException e) {
+            connection = DriverManager.getConnection("jdbc:sqlite:/Users/vidhijain/my_database.db");
+            System.out.println("Connection established successfully. Connected to SQLite database!");
+
+            // Create a statement object for executing SQL commands
+            Statement statement = connection.createStatement();
+
+            // Example: Create a table (if it doesn't already exist)
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS product (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "name TEXT NOT NULL, " +
+                    "price FLOAT NOT NULL, " +
+                    "manufacturedDate DATE" +
+                    ");";
+            statement.execute(createTableSQL);
+            System.out.println("Table created or already exists.");
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         //return the connection object

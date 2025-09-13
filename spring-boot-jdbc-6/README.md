@@ -18,3 +18,16 @@ executeQuery loads all the records and returns the result set. The result set is
 through the records using next() method.
 
 executeUpdate is used to execute DML statements like insert, update, delete. It returns the number of rows affected.
+
+**Note:-** In this project I am using sqlite DB. It's a file based DB. No need to install any DB server.
+Steps to use sqlite DB in mac. Run following commands in terminal
+````
+
+sqlite3 my_database.db
+
+sqlite> .tables
+
+sqlite> select * from product;
+
+sqlite> select * from product where price between 0 and 1000;
+````
