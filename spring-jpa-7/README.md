@@ -49,6 +49,8 @@ class and write complex SQL queries to fetch the data.
 
 #### Creating entity class for a table which has employee details and address details
 
+Employee has one-to-one relationship with Address. One Employee has one Address.
+
 Employee details and address details are stored in same table. Address is a component of Employee. It is HAS A relationship.
 We will create two classes Employee and Address. Address class will be embedded in Employee class using @Embeddable.
 
