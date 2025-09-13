@@ -4,6 +4,7 @@ import com.learn.springjpacollections8.entity.Address;
 import com.learn.springjpacollections8.entity.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class EmployeeRepository {
     @PersistenceContext
     private EntityManager em; //responsible for managing the entity objects (CRUD operations)
+    @Transactional
     public Employee addNewEmployee(Employee employee) {
        em.persist(employee); //insert query
         System.out.println("Employee added with ID: " + employee.getEmpId());
