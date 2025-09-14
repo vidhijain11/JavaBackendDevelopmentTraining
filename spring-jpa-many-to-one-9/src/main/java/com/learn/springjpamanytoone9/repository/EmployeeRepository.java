@@ -14,18 +14,16 @@ public class EmployeeRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Employee addNewEmployee(Employee emp, int deptId) {
+    public void addNewEmployee(Employee emp, int deptId) {
         Department dept = entityManager.find(Department.class, deptId);
         if (dept == null) {
             throw new RuntimeException("Department with ID " + deptId + " not found");
         }
         emp.setDepartment(dept);
         entityManager.persist(emp);
-        return emp;
     }
 
-    public Department addNewDepartment(Department dept) {
+    public void addNewDepartment(Department dept) {
         entityManager.persist(dept);
-        return dept;
     }
 }
