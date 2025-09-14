@@ -24,6 +24,7 @@ public class SpringJpaCollections8Application {
 
     private static void readEmployee() {
         repository.readEmployee(101);
+        repository.readEmployeeMultipleTimesFromCache(101); //to demonstrate transactional for read
     }
 
     private static void addEmployee() {
