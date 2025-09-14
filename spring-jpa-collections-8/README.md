@@ -27,3 +27,24 @@ The find method returns the entity object if found, otherwise it returns null.
 It will return only employee object, it will not return the addresses.
 By default the collection of addresses is lazy loaded, so the addresses will be loaded only when we access the addresses
 field. This improves the performance.
+
+##### Transactional context
+Transactional required for insert, update, delete operations. 
+For read operations, it is not mandatory but it is a good practice to use transactional context.
+
+````
+  Employee emp1 = em.find(Employee.class, empId);
+  Employee emp2 = em.find(Employee.class, empId);
+````
+If we call find method multiple times without using transaction, it will run the query two times and return the same object.
+There is a cache called persistence context which is associated with the transaction. 
+When we call find method, it will first check the persistence context for the entity object. If it is found in the
+persistence context, it will return the object from the cache. If it is not found in the cache, it will run the query and fetch
+the object from the database and store it in the persistence context.
+So, if we call find method multiple times within the same transaction, it will return the object from the cache and will not run the query again.
+
+![img.png](doc/persistenceContext.png)
+
+@Transactional annotation can be applied at method level or class level.
+If we apply @Transactional at class level, it will be applied to all the methods of the class.
+If we apply @Transactional at method level, it will be applied only to that method.
